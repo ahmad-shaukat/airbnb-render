@@ -5,6 +5,7 @@ import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { NavLink, useHistory } from "react-router-dom";
+import './profilebutton.css'
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -40,26 +41,36 @@ function ProfileButton({ user }) {
     history.push('/')
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = `profile-dropdown ${showMenu ? "show" : "hidden"}  open-menu`;
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
+       <div className="menu-container" onClick={openMenu} tabIndex="0" >
+
+<i className="fa-solid fa-bars"></i>
+<button onClick={openMenu} className="menu-butt">
+  <i className="fa-solid fa-user fa-lg" style={{ color: 'white' }}></i>
+</button>
+
+</div>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <div>
-              <li>Hello, {user.firstName}</li>
-              <li>{user.email}</li>
+            <div className="user-info">
+              <li>Hello {user.firstName} </li>
+              <li className="email">{user.email}</li>
             </div>
-            <div>
-              <NavLink to='/spots/current'>Manage Spots</NavLink>
+            <div className="user-menu">
+              <div className="mng-spot-lnk">
+              <NavLink to={'/spots/current'} className='nav-mang-spt'>
+                Manage Spots
+              </NavLink>
+              </div>
+                <button onClick={logout} className="lgout-btn">Log Out</button> 
+              
+
+              
             </div>
-            <li>
-              <button onClick={logout}>Log Out</button>
-            </li>
           </>
         ) : (
           <>

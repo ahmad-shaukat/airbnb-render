@@ -14,31 +14,95 @@ const Spots = () => {
         dispatch(getAllSpots())
     }, [dispatch])
 
+
+
+
     return (
+
         <>
-        <h1>Spots</h1>
-        <div className="main-page-outside-container">
-            {spotList.map((spot) => (
-                <div key={spot.id} className="main-page-inside-container">
-                    <span className="main-page-tooltip">{spot.name}</span>
-                    <NavLink key={spot.id} to={`/spots/${spot.id}`}>
+            <div className='spot'>
 
-                    <img src={spot.previewImage} className="main-page-image"/>
-                    <div className="main-page-location-rating">
-                        <div>{spot.city}, {}
-                            {spot.state}
-                        </div>
-                        <div>{!spot.avgRating ? <div><i class="fa-solid fa-star"></i> New </div> : <div>
-                            <i class="fa-solid fa-star"></i> {spot.avgRating.toFixed(1)} </div>}</div>
+                {spotList.map((spot) => (
+
+                    <div key={spot.id} className='spot-detail' id='parent'>
+                        <p className='main-spot-name'>{spot.name}</p>
+
+                        <NavLink to={`/spots/${spot.id}`}>
+                            
+
+                                <div className='image-div'>
+                                    <img src={spot.previewImage} className='img' onError={(e) => e.target.src = 'http://www.staticwhich.co.uk/static/images/products/no-image/no-image-available.png'}/>
+
+                                </div>
+
+
+                                <div className='location-rating'>
+                                    <p className=''>{spot.city}, {spot.state}</p>
+                                    <div className='rating-star'>
+
+                                        <i class="fa-solid fa-star"></i><p>{!spot.avgRating?<div>New</div>:<div>{spot.avgRating.toFixed(1)}</div> }</p>
+                                    </div>
+                                </div>
+                                <p className='price'>${spot.price} Night</p>
+
+                            {/* </div> */}
+
+
+                            {/* </div> */}
+                        </NavLink>
+
+
+
                     </div>
-                    <div className="main-page-price">${spot.price} night</div>
-                    </NavLink>
-                </div>
 
-            ))}
-        </div>
+
+                ))}
+            </div>
+
         </>
+
+
+
+
     )
+
+
+return (
+    <>
+        <h1>Loading</h1>
+    </>
+
+)
+
+
+
+
+
+    // return (
+    //     <>
+    //     <h1>Spots</h1>
+    //     <div className="main-page-outside-container">
+    //         {spotList.map((spot) => (
+    //             <div key={spot.id} className="main-page-inside-container">
+    //                 <span className="main-page-tooltip">{spot.name}</span>
+    //                 <NavLink key={spot.id} to={`/spots/${spot.id}`}>
+
+    //                 <img src={spot.previewImage} className="main-page-image"/>
+    //                 <div className="main-page-location-rating">
+    //                     <div>{spot.city}, {}
+    //                         {spot.state}
+    //                     </div>
+    //                     <div>{!spot.avgRating ? <div><i class="fa-solid fa-star"></i> New </div> : <div>
+    //                         <i class="fa-solid fa-star"></i> {spot.avgRating.toFixed(1)} </div>}</div>
+    //                 </div>
+    //                 <div className="main-page-price">${spot.price} night</div>
+    //                 </NavLink>
+    //             </div>
+
+    //         ))}
+    //     </div>
+    //     </>
+    // )
 }
 
 export default Spots;
